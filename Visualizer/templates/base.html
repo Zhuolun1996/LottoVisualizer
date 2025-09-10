@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WA彩票</title>
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+<div class="container-fluid">
+    <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/show_drawing?lotto=PowerBall&retrieve_count=10" class="nav-link">PowerBall</a></li>
+            <li class="nav-item"><a href="/show_drawing?lotto=WALotto&retrieve_count=10" class="nav-link">WALotto</a></li>
+            <li class="nav-item"><a href="/update_powerball/" class="nav-link">更新PowerBall</a></li>
+            <li class="nav-item"><a href="/update_walotto/" class="nav-link">更新WALotto</a></li>
+        </ul>
+    </header>
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>

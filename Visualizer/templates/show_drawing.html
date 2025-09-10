@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load static %}
+{% load visualizer_extras %}
+{% block content %}
+
+    <form class="row gy-2 gx-3 align-items-center" action="/show_drawing/" method="get">
+        {% for key, value in request.GET.items %}
+            {% if key != "retrieve_count" %} {# avoid duplicating the field being edited #}
+                <input type="hidden" name="{{ key }}" value="{{ value }}">
+            {% endif %}
+        {% endfor %}
+        <div class="col-auto">
+            <label class="visually-hidden" for="autoSizingInput">次数</label>
+            <input type="text" class="form-control" name="retrieve_count" id="autoSizingInput" value="{{ request.GET.retrieve_count }}">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">显示次数</button>
+        </div>
+    </form>
+
+    <h2>普通号</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered border-primary w-100">
+            <thead>
+            <tr>
+                <th scope="col">日期</th>
+                {% for i in lotto_range %}
+                    <th scope="col">{{ i }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for drawing in drawings %}
+                <tr>
+                    <td>{{ drawing.lotto_date|date:"Y/m/d" }}</td>
+                    {% for i in lotto_range %}
+                        {% if i|has_number:drawing.lotto_number %}
+                            <td class="table-danger">{{ i }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if lotto_type.has_special %}
+        <h2>特殊号</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered border-primary w-100">
+                <thead>
+                <tr>
+                    <th scope="col">日期</th>
+                    {% for i in lotto_range %}
+                        <th scope="col">{{ i }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for drawing in drawings %}
+                    <tr>
+                        <td>{{ drawing.lotto_date|date:"Y/m/d" }}</td>
+                        {% for i in lotto_range %}
+                            {% if i|has_special_number:drawing.lotto_number %}
+                                <td class="table-danger">{{ i }}</td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}

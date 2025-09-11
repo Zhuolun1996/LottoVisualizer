@@ -14,7 +14,8 @@
         {% endfor %}
         <div class="col-auto">
             <label class="visually-hidden" for="autoSizingInput">次数</label>
-            <input type="text" class="form-control" name="retrieve_count" id="autoSizingInput" value="{{ request.GET.retrieve_count }}">
+            <input type="text" class="form-control" name="retrieve_count" id="autoSizingInput"
+                   value="{{ request.GET.retrieve_count }}">
         </div>
         <div class="col-auto">
             <button type="submit" class="btn btn-primary">显示次数</button>
@@ -37,10 +38,18 @@
                 <tr>
                     <td>{{ drawing.lotto_date|date:"Y/m/d" }}</td>
                     {% for i in lotto_range %}
-                        {% if i|has_number:drawing.lotto_number %}
-                            <td class="table-danger">{{ i }}</td>
+                        {% if lotto_type.has_special %}
+                            {% if i|has_number_exclude_special:drawing.lotto_number %}
+                                <td class="table-danger">{{ i }}</td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
                         {% else %}
-                            <td></td>
+                            {% if i|has_number_all:drawing.lotto_number %}
+                                <td class="table-danger">{{ i }}</td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 </tr>

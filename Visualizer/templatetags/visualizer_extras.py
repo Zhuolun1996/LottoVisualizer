@@ -31,7 +31,14 @@ def split_filter(value, delimiter=","):
     except Exception:
         return []
 
-@register.filter(name="has_number")
+@register.filter(name="has_number_all")
+def has_number_filter(value, lotto_numbers):
+    if str(value) in lotto_numbers.split(","):
+        return True
+    else:
+        return False
+
+@register.filter(name="has_number_exclude_special")
 def has_number_filter(value, lotto_numbers):
     if str(value) in lotto_numbers.split(",")[:-1]:
         return True

@@ -21,7 +21,7 @@ def show_drawing(request):
         retrieve_count = int(retrieve_count)
     if not lotto:
         lotto = "PowerBall"
-    drawings = LottoDraw.objects.filter(lotto_type__name=lotto).order_by("lotto_date")[retrieve_count:]
+    drawings = LottoDraw.objects.filter(lotto_type__name=lotto).order_by("-lotto_date")[:retrieve_count][::-1]
     lotto_type = LottoType.objects.get(name=lotto)
     context = {
         "drawings": drawings,

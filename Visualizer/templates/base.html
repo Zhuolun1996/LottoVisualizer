@@ -7,13 +7,37 @@
     {% load django_bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 20px auto; /* center the table */
+            width: 100%; /* make table stretch across the screen */
+            table-layout: fixed; /* distribute columns evenly */
+        }
+
+        td, th {
+            border: 1px solid #ccc;
+            padding: 10px;
+            cursor: pointer;
+            text-align: center;
+            height: 10px; /* equal row height */
+            word-wrap: break-word; /* prevent overflow */
+            width: 35px; /* equal column width */
+        }
+
+        th.wide {
+            width: 100px; /* or % if you prefer */
+        }
+    </style>
 </head>
 <body>
 <div class="container-fluid">
     <header class="d-flex justify-content-center py-3">
         <ul class="nav nav-pills">
-            <li class="nav-item"><a href="/show_drawing?lotto=PowerBall&retrieve_count=10" class="nav-link">PowerBall</a></li>
-            <li class="nav-item"><a href="/show_drawing?lotto=WALotto&retrieve_count=10" class="nav-link">WALotto</a></li>
+            <li class="nav-item"><a href="/show_drawing?lotto=PowerBall&retrieve_count=10"
+                                    class="nav-link">PowerBall</a></li>
+            <li class="nav-item"><a href="/show_drawing?lotto=WALotto&retrieve_count=10" class="nav-link">WALotto</a>
+            </li>
             <li class="nav-item"><a href="/update_powerball/" class="nav-link">更新PowerBall</a></li>
             <li class="nav-item"><a href="/update_walotto/" class="nav-link">更新WALotto</a></li>
         </ul>

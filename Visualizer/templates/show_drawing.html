@@ -24,10 +24,10 @@
 
     <h2>普通号</h2>
     <div class="table-responsive">
-        <table class="table table-bordered border-primary w-100">
+        <table class="table">
             <thead>
             <tr>
-                <th scope="col">日期</th>
+                <th class="wide" scope="col">日期</th>
                 {% for i in lotto_range %}
                     <th scope="col">{{ i }}</th>
                 {% endfor %}
@@ -54,6 +54,19 @@
                     {% endfor %}
                 </tr>
             {% endfor %}
+
+            <tr class="row-eligible">
+                <td>预测</td>
+                {% for i in lotto_range %}
+                    <td data-number="{{ i }}"></td>
+                {% endfor %}
+            </tr>
+            <tr class="row-eligible">
+                <td>预测</td>
+                {% for i in lotto_range %}
+                    <td data-number="{{ i }}"></td>
+                {% endfor %}
+            </tr>
             </tbody>
         </table>
     </div>
@@ -64,7 +77,7 @@
             <table class="table table-bordered border-primary w-100">
                 <thead>
                 <tr>
-                    <th scope="col">日期</th>
+                    <th class="wide" scope="col">日期</th>
                     {% for i in lotto_range %}
                         <th scope="col">{{ i }}</th>
                     {% endfor %}
@@ -83,8 +96,39 @@
                         {% endfor %}
                     </tr>
                 {% endfor %}
+                <tr class="row-eligible">
+                    <td>预测</td>
+                    {% for i in lotto_range %}
+                        <td data-number="{{ i }}"></td>
+                    {% endfor %}
+                </tr>
+                <tr class="row-eligible">
+                    <td>预测</td>
+                    {% for i in lotto_range %}
+                        <td data-number="{{ i }}"></td>
+                    {% endfor %}
+                </tr>
                 </tbody>
             </table>
         </div>
     {% endif %}
+
+    <script>
+        document.querySelectorAll("td").forEach(td => {
+            td.addEventListener("click", () => {
+                const tr = td.closest("tr");
+                if (tr.classList.contains("row-eligible")) {
+                    if (td.classList.contains("table-danger")) {
+                        // currently visible → hide
+                        td.classList.remove("table-danger");
+                        td.textContent = "";
+                    } else {
+                        // currently hidden → show
+                        td.classList.add("table-danger");
+                        td.textContent = td.dataset.number;
+                    }
+                }
+            });
+        });
+    </script>
 {% endblock %}

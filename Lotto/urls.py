@@ -25,4 +25,6 @@ urlpatterns = [
     path('show_drawing/', views.show_drawing),
     path('update_powerball/', views.update_data_powerball),
     path('update_walotto/', views.update_data_wa_lotto),
+    path('update_hit5/', views.update_data_hit5),
+    path('update_match4/', views.update_data_match4),
 ]

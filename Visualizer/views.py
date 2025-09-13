@@ -57,3 +57,17 @@ def update_data_wa_lotto(request):
         "https://www.walottery.com/WinningNumbers/PastDrawings.aspx?gamename=lotto&unittype=day&unitcount=180",
         "WALotto")
     return redirect("/show_drawing/?retrieve_count=10&lotto=WALotto")
+
+def update_data_hit5(request):
+    update_data(
+        "https://www.walottery.com/WinningNumbers/PastDrawings.aspx?gamename=hit5&unittype=day&unitcount=180",
+        "Hit5")
+    return redirect("/show_drawing/?retrieve_count=10&lotto=Hit5")
+
+
+def update_data_match4(request):
+    update_data(
+        "https://www.walottery.com/WinningNumbers/PastDrawings.aspx?gamename=match4&unittype=day&unitcount=180",
+        "Match4")
+    return redirect("/show_drawing/?retrieve_count=10&lotto=Match4")
+
